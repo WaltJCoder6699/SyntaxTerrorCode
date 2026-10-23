@@ -16,6 +16,11 @@ public class Drivetrain {
   
     
     public void motor_init(HardwareMap hardwareMap) {
+        leftFront = hardwareMap.get(DcMotor.class, "leftFront");
+        leftBack = hardwareMap.get(DcMotor.class, "leftBack");
+        rightFront = hardwareMap.get(DcMotor.class, "rightFront");
+        rightBack = hardwareMap.get(DcMotor.class, "rightBack");
+
         DcMotor[] motors = {leftFront, leftBack, rightFront, rightBack};
 
         motors[0] = hardwareMap.get(DcMotor.class
