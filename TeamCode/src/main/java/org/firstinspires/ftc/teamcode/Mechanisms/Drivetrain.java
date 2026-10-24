@@ -8,10 +8,10 @@ import java.util.Arrays;
 
 
 public class Drivetrain {
-    private DcMotor leftFront;
-    private DcMotor leftBack;
-    private DcMotor rightFront;
-    private DcMotor rightBack;
+    protected DcMotor leftFront;
+    protected DcMotor leftBack;
+    protected DcMotor rightFront;
+    protected DcMotor rightBack;
 
   
     
