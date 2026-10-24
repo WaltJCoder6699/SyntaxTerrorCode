@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import java.util.Arrays;
 
 
 public class Drivetrain {
@@ -21,20 +20,14 @@ public class Drivetrain {
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
 
-        DcMotor[] motors = {leftFront, leftBack, rightFront, rightBack};
+        DcMotor[] allMotors = {leftFront, leftBack, rightFront, rightBack};
 
-        motors[0] = hardwareMap.get(DcMotor.class
-        for(DcMotor motors : motors) {
-            motors.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            motors.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        for(DcMotor motor : allMotors) {
+            motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
-
-
-        for (DcMotor dcMotor : DcMotor()) {
-            dcMotor[0] = hardwareMap.get(DcMotor.class, "leftFront");
-        }
     }
 }
