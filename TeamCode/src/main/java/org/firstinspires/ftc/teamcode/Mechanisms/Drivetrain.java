@@ -4,23 +4,20 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-
-
 public class Drivetrain {
-    protected DcMotor leftFront;
-    protected DcMotor leftBack;
-    protected DcMotor rightFront;
-    protected DcMotor rightBack;
 
-  
-    
-    public void motor_init(HardwareMap hardwareMap) {
+    private DcMotor leftFront;
+    private DcMotor leftBack;
+    private DcMotor rightFront;
+    private DcMotor rightBack;
+
+    public void drivetrainInit(HardwareMap hardwareMap) {
         leftFront = hardwareMap.get(DcMotor.class, "leftFront");
         leftBack = hardwareMap.get(DcMotor.class, "leftBack");
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
 
-        DcMotor[] allMotors = {leftFront, leftBack, rightFront, rightBack};
+        DcMotor[] allMotors = new DcMotor[]{leftFront, leftBack, rightFront, rightBack};
 
         for(DcMotor motor : allMotors) {
             motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -29,5 +26,11 @@ public class Drivetrain {
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+    }
+    public void setPowers(double lf, double lb, double rf, double rb) {
+        leftFront.setPower(lf);
+        leftBack.setPower(lb);
+        rightFront.setPower(rf);
+        rightBack.setPower(rb);
     }
 }
