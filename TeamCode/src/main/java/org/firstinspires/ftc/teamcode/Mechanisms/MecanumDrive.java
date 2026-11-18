@@ -1,15 +1,26 @@
 package org.firstinspires.ftc.teamcode.Mechanisms;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+
+/**
+ * This is the class for running a Mecanum Drive robot
+ * Implement it at the start of your class like so:
+ * @code MecanumDrive mecanumDrive = new MecanumDrive();
+ */
 
 public class MecanumDrive {
 
     // Imports Drivetrain Mechanisms Class for easy Drivetrain control
     Drivetrain drivetrain = new Drivetrain();
 
-    // For driving forward/backward based on gamepad input
+    /**
+     * This is for allowing the robot to simply drive back and forward with Gamepad Left Stick Y
+     * @param gamepad set to gamepad
+     * @param telemetry set to telemetry
+     */
     public void drive(Gamepad gamepad, Telemetry telemetry) {
         double power = Math.max(Math.min(-gamepad.left_stick_y, 1.0), -1.0);
         drivetrain.setPowers(power, power, power, power);
@@ -23,7 +34,12 @@ public class MecanumDrive {
         telemetry.update();
 
     }
-    // Strafes based upon gamepad input
+
+    /**
+     * This is for strafing left or right, using the left joystick X axis
+     * @param gamepad set to gamepad
+     * @param telemetry set to telemetry
+     */
     public void strafe(Gamepad gamepad, Telemetry telemetry) {
         double power = gamepad.left_stick_x;
         if(power < 0) {
@@ -38,17 +54,32 @@ public class MecanumDrive {
         }
         telemetry.update();
     }
-    // Turns based on gamepad input
-    public void turnRight(Gamepad gamepad) {
+
+    /**
+     * This is for turning right
+     * @param gamepad set to gamepad
+     * @param telemetry set to telemetry
+     */
+    public void turnRight(Gamepad gamepad, Telemetry telemetry) {
         double power = -Math.abs(gamepad.right_stick_x);
         drivetrain.setPowers(power, power, -power, -power);
     }
     // Turns left when called and gamepad is used
-    public void turnLeft(Gamepad gamepad) {
+
+    /**
+     * This is for turing left
+     * @param gamepad set to gamepad
+     * @param telemetry set to telemetry
+     */
+    public void turnLeft(Gamepad gamepad, Telemetry telemetry) {
         double power = -Math.abs(gamepad.right_stick_x);
         drivetrain.setPowers(-power, -power, power, power);
     }
-    // This is for one method for controlling the robot
+
+    /**
+     * Instantiate this as a method to give control for a mecanum drive robot
+     * @param gamepad should be set to gamepad
+     */
     public void mecanumDrive(Gamepad gamepad) {
         // Create drive vars
         double drive;

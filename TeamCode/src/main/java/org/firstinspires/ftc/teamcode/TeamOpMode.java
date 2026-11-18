@@ -5,7 +5,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Mechanisms.Drivetrain;
+import org.firstinspires.ftc.teamcode.Mechanisms.Intake;
+import org.firstinspires.ftc.teamcode.Mechanisms.LimelightAprilTagDetection;
 import org.firstinspires.ftc.teamcode.Mechanisms.MecanumDrive;
+import org.firstinspires.ftc.teamcode.Mechanisms.Turret;
 
 @TeleOp
 public class TeamOpMode extends OpMode {
@@ -13,22 +16,41 @@ public class TeamOpMode extends OpMode {
     private ElapsedTime runtime = new ElapsedTime();
 
     //Call custom classes coded by the team
+    /**
+     * Hardware Class Implementations
+     */
     Drivetrain drivetrain; //Controls drivetrain
 
     {
-        drivetrain = new Drivetrain();
+        this.drivetrain = new Drivetrain();
     }
     MecanumDrive mecanumDrive; //Controls the mecanumDrive specifically
 
     {
-        mecanumDrive = new MecanumDrive();
+        this.mecanumDrive = new MecanumDrive();
     }
 
-    Limelight
+    Intake intake; //Controls t
 
+    {
+        this.intake = new Intake();
+    }
+
+    Turret turret;
+
+    {
+        this.turret = new Turret();
+    }
+
+    LimelightAprilTagDetection latd;
+
+    {
+        latd = new LimelightAprilTagDetection();
+    }
 
     @Override
     public void init() {
+        drivetrain.drivetrainInit(hardwareMap);
 
     }
 

@@ -1,57 +1,41 @@
 package org.firstinspires.ftc.teamcode.Mechanisms;
 
+import static com.qualcomm.hardware.limelightvision.LLResultTypes.*;
+
+import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.robotcore.external.hardware.camera.CameraName;
-import org.firstinspires.ftc.vision.VisionPortal;
-import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
-import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
-
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import java.util.List;
+import java.util.ArrayList;
 
-@TeleOp
-public class Turret extends OpMode {
-    private
-    private VisionPortal visionPortal;
-    private AprilTagProcessor aprilTagProcessor;
+public class Turret {
+    LimelightAprilTagDetection limelightAprilTagDetection = new LimelightAprilTagDetection();
 
-    @Override
-    public void init() {
+    protected static final List<Number> sideOne = new ArrayList<>(List.of(38, 39, 40, 41));
+        //List side one AprilTag IDs
+    protected static final List<Number> sideTwo = new ArrayList<>(List.of(42, 43, 44, 45));
 
-    }
-    @Override
-    public void init_loop() {
-        initLimelight();
-    }
-    @Override
-    public void start() {
+    //List side two AprilTag IDs
+    public void turretAutoSpinToAprilTag(Limelight3A limelight, Telemetry telemetry, HardwareMap hardwareMap) {
 
-    }
-    @Override
-    public void loop() {}
+        limelightAprilTagDetection.limelight(hardwareMap);
+        //Implement the limelight code from our custom class
 
-    public void initLimelight() {
-        //Call Limelight3A Hardware
-        Limelight3A limelight = hardwareMap.get(Limelight3A.class, "limelight");
+        LLResult result = limelight.getLatestResult();
+        List<FiducialResult> fiducialResults = result.getFiducialResults();
+        //Check for latest AprilTag results
 
-        /*
-         * Sets the telemetry transmission interval so that Telemetry updates way faster
-         * (changes to 11 ms vs. default 250ms)
-         * This is so that the DS can read Telemetry far faster
-         */
-        telemetry.setMsTransmissionInterval(11);
+        for (FiducialResult fr : fiducialResults) {
+            if (!sideOne.contains(fr.getFiducialId())) {
+            telemetry.addData("LLResult", "Is Working");
+            telemetry.update();
 
-        limelight.pipelineSwitch(0);
-
-        /*
-         * Starts polling for data.  If you neglect to call start(), getLatestResult() will return null.
-         */
-        limelight.start();
-
-        telemetry.addData(">", "Robot Ready.  Press Play.");
-        telemetry.update();
+            telemetry.addData("Fiducial", "ID: %d, Family: %s, X: %.2f, Y: %.2f", fr.getFiducialId(), fr.getFamily(), fr.getTargetXDegrees(), fr.getTargetYDegrees());
+            }
+        }
     }
 }
+
+//FTC AprilTag Values:
+// Side One: 38, 39, 40, 41,
+// Side Two: 42, 43, 44, 45

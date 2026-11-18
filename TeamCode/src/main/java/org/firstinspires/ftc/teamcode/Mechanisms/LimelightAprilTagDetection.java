@@ -8,27 +8,26 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
-import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 import java.util.List;
 
 public class LimelightAprilTagDetection {
-    HardwareMap hardwareMap;
-    Telemetry telemetry;
-    Limelight3A limelight;
-    AprilTagProcessor aprilTag;
+    Limelight3A limelight = new Limelight3A();
 
+    public void limelightFull(HardwareMap hardwareMap, Telemetry telemetry, Limelight3A limelight) {
 
-    private void hardware() { //Creates hardware for the class to use without being an OpMode
-        {
-            limelight = hardwareMap.get(Limelight3A.class, "limelight");
-        }
+        limelight = hardwareMap.get(Limelight3A.class, "limelight");
+
+        limelightInit(telemetry, limelight1);
+
+        limelightStatus();
+
+        getLatestResult();
     }
 
-    public void limelight() {
-        hardware();
+    public void limelightInit(Telemetry telemetryLI, Limelight3A limelight1) {
 
-        telemetry.setMsTransmissionInterval(11);
+        telemetryLI.setMsTransmissionInterval(11);
 
         limelight.pipelineSwitch(0);
 
@@ -37,12 +36,11 @@ public class LimelightAprilTagDetection {
          */
         limelight.start();
 
-        telemetry.addData(">", "Robot Ready.  Press Play.");
-        telemetry.update();
-        // Create the AprilTag processor the easy way.
-        aprilTag = AprilTagProcessor.easyCreateWithDefaults();
+        telemetryLI.addData(">", "Robot Ready.  Press Play.");
+        telemetryLI.update();
+    }
 
-
+    public void limelightStatus(Limelight3A limelight, Telemetry telemetry) {
         LLStatus status = limelight.getStatus();
         telemetry.addData("Name", "%s",
                 status.getName());
@@ -59,7 +57,9 @@ public class LimelightAprilTagDetection {
                 status.getTemp(), status.getCpu(), (int) status.getFps());
         telemetry.addData("Pipeline", "Index: %d, Type: %s",
                 status.getPipelineIndex(), status.getPipelineType());
+    }
 
+    public void getLatestResult(Limelight3A limelight, Telemetry telemetry) {
         LLResult result = limelight.getLatestResult();
         if (result.isValid()) {
             // Access general information
@@ -88,3 +88,7 @@ public class LimelightAprilTagDetection {
         }
     }
 }
+
+//FTC AprilTag Values:
+// Side One: 38, 39, 40, 41,
+// Side Two: 42, 43, 44, 45
