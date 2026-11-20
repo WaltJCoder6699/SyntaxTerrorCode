@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.Mechanisms;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -78,13 +77,8 @@ public class MecanumDrive {
 
     /**
      * Instantiate this as a method to give control for a mecanum drive robot
-     * @param gamepad should be set to gamepad
      */
-    public void mecanumDrive(Gamepad gamepad) {
-        // Create drive vars
-        double drive;
-        double strafe;
-        double turn;
+    public void mecanumDrive(double drive, double strafe, double turn) {
 
         // Assign drive vars
         drive = -gamepad.left_stick_y;
@@ -117,7 +111,4 @@ public class MecanumDrive {
         // Send the finished motor powers to the actual hardware
         drivetrain.setPowers(leftFrontPower, leftBackPower, rightFrontPower, rightBackPower);
     }
-    /*
-    * Disclosure: the mathematics of this code was helped along with, by FTC Samples and AI
-    * */
 }

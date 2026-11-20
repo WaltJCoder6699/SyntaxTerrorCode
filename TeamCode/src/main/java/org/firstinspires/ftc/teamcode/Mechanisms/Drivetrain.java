@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 /**
  * This is the class controlling the base motors to organize them into a coherent drivetrain
- *
  * Use it like this:
  * @code Drivetrain drivetrain = new Drivetrain();
  */
@@ -22,7 +21,6 @@ public class Drivetrain {
 
     /**
      * This is used in OpMode or a drivetrain class to initialize motors in the drivetrain
-     *
      * The correct usage is
      * @code drivetrain.drivetrainInit();
      */
