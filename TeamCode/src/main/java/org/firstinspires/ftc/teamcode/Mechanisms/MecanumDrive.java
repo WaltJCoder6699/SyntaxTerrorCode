@@ -66,7 +66,7 @@ public class MecanumDrive {
     // Turns left when called and gamepad is used
 
     /**
-     * This is for turing left
+     * This is for turning left
      * @param gamepad set to gamepad
      * @param telemetry set to telemetry
      */
