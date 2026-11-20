@@ -79,12 +79,6 @@ public class MecanumDrive {
      * Instantiate this as a method to give control for a mecanum drive robot
      */
     public void mecanumDrive(double drive, double strafe, double turn) {
-
-        // Assign drive vars
-        drive = -gamepad.left_stick_y;
-        strafe = gamepad.right_stick_x;
-        turn = gamepad.left_stick_x;
-
         // Create power vars
         double leftFrontPower;
         double leftBackPower;
